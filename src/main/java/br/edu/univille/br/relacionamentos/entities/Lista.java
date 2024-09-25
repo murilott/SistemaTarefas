@@ -19,6 +19,7 @@ public class Lista {
     private String nome;
 
     @Column(nullable = false)
+    @ManyToOne
     private Usuario criador;
 
     @Column(nullable = false)

@@ -28,6 +28,7 @@ public class Usuario {
     private String email;
 
     @Column(nullable = false)
+    @OneToOne
     private Perfil perfil;
     
     private List<Lista> listas;
