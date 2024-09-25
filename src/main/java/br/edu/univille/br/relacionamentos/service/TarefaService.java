@@ -46,8 +46,8 @@ public class TarefaService {
         return todosLista;
     }
 
-    public Tarefa ObterPeloId(Long id) {
-        return repository.findById(id).orElse(null);
+    public Optional<Tarefa> ObterPeloId(Long id) {
+        return repository.findById(id); //.orElse(null)
     }
 
     public Tarefa Atualizar(Tarefa tarefa) {
@@ -64,7 +64,7 @@ public class TarefaService {
     public Tarefa Cadastrar(Tarefa tarefa) {
         tarefa.setId(0);
         tarefa = repository.save(tarefa);
-        
+
         return tarefa;
     }
 }

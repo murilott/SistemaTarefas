@@ -19,15 +19,20 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository repository;
 
-    public Usuario ObterPeloId(Long id) {
-        Usuario user = repository.findById(id).orElse(null);
-        user.setSenha("*");
+    public Optional<Usuario> ObterPeloId(Long id) {
+        Optional<Usuario> user = repository.findById(id);
+        user.ifPresent(us -> us.setSenha("*"));
+        // user.setSenha("*");
         return user;
     }
 
     public Usuario Cadastrar(Usuario usuario) {
+        Perfil perfil = new Perfil();
+        perfil.setNomeCompleto(usuario.getNomeCompleto());
+        perfil.setUsuario(usuario);
+
         usuario.setId(0);
-        usuario.setPerfil(new Perfil());
+        usuario.setPerfil(perfil);
         usuario = repository.save(usuario);
 
         return usuario;
