@@ -45,4 +45,26 @@ public class TarefaService {
 
         return todosLista;
     }
+
+    public Tarefa ObterPeloId(Long id) {
+        return repository.findById(id).orElse(null);
+    }
+
+    public Tarefa Atualizar(Tarefa tarefa) {
+        Tarefa antigo = repository.findById(tarefa.getId()).orElse(null);
+
+        antigo.setTitulo(tarefa.getTitulo());
+        antigo.setDescricao(tarefa.getDescricao());
+        antigo.setPrioridade(tarefa.getPrioridade());
+        antigo.setStatus(tarefa.getStatus());
+
+        return repository.save(antigo);
+    }
+
+    public Tarefa Cadastrar(Tarefa tarefa) {
+        tarefa.setId(0);
+        tarefa = repository.save(tarefa);
+        
+        return tarefa;
+    }
 }
